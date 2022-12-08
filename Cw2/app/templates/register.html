@@ -1,0 +1,40 @@
+<!-- extend base template -->
+{% extends "authenticationBase.html" %}
+
+{% block Content %}
+<h1 class="mb-3">Register</h1>
+<form action="">
+    <div class="form-floating mb-3">
+        <input type="username" class="form-control" id="floatingInput" placeholder="Username123">
+        <label for="floatingInput">Username</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="username" class="form-control" id="floatingInput" placeholder="Username123">
+        <label for="floatingInput">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="username" class="form-control" id="floatingInput" placeholder="Username123">
+        <label for="floatingInput">Confirm Password</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="username" class="form-control" id="floatingInput" placeholder="Username123">
+        <label for="floatingInput">Profile Image URL</label>
+    </div>
+
+    <div class="mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="form2Example3c" />
+        <label class="" >
+            I agree to all statements in <a href="#!">Terms of service</a>
+          </label>
+    </div>
+
+    <div class="d-grid">
+        <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Sign Up</button>
+        <div class="text-center">
+            <a class="small" href="{{url_for('login')}}">Already have an account?</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
