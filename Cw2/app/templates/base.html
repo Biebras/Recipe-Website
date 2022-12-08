@@ -43,10 +43,17 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('index')}}">Add Recipes</a>
               </li>
+
+              {% if user.is_authenticated %}
               <!-- Login -->
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+              </li>
+              {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('login')}}">Login</a>
               </li>
+              {% endif %}
           </ul>
         </div>
       </div>

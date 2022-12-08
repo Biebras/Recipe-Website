@@ -19,3 +19,6 @@ class UserModel(db.Model, UserMixin):
             self.ImageUrl = "https://img.icons8.com/fluency/512/cat-profile.png"
         else:
             self.ImageUrl = imageUrl
+
+    def get_id(self):
+           return (self.UserID)

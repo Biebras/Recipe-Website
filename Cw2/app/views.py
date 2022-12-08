@@ -1,5 +1,5 @@
 # import necessary labraries 
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, flash
 from app import app, db, login_manager
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from .forms import RegisterForm, LoginForm
@@ -8,24 +8,32 @@ from .models import UserModel
 # handle index template
 @app.route("/")
 def index():
-    return render_template("index.html", title="Home Page")
+    return render_template("index.html", title="Home Page", user = current_user)
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
     form = LoginForm(request.form)
 
-    if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(Username=form.Username.data).first
-        print(form.Username.data)
+    if request.method == 'POST':
+        user = UserModel.query.filter_by(Username=form.Username.data).first()
+        # print(load_user(1).Username)
 
         if(user):
             if(user.Password != form.Password.data):
-                alert("Wrong password")
+                flash("Password or username was incorrect")
             else:
                 login_user(user)
                 return redirect("/")
+        else:
+            flash("Password or username was incorrect")
 
     return render_template("login.html", title="Login Page", form = form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect("/")
+
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -51,5 +59,5 @@ def add_header(response):
     return response
 
 @login_manager.user_loader
-def load_user(user_id):
-    return UserModel.query.get(int(user_id))
+def load_user(userID):
+    return UserModel.query.get(userID)
