@@ -1,15 +1,21 @@
 from app import db
+from flask_login import UserMixin
 
 # Model for courswork
-class CwModel(db.Model):
+class UserModel(db.Model, UserMixin):
     # primary key
     UserID = db.Column(db.Integer, primary_key=True)
-    Username = db.Column(db.String(100))
-    Password = db.Column(db.String(20))
-    ImageUrl = db.Column(db.String(100))
+    Username = db.Column(db.String(16), nullable=False)
+    Password = db.Column(db.String(16), nullable=False)
+    ImageUrl = db.Column(db.String(300), nullable=False)
 
     # initialise variables
     def __init__(self, username, password, imageUrl):
         self.Username = username
         self.Password = password
-        self.ImageUrl = imageUrl
+
+        # set deffault value if imageURL is empty
+        if(imageUrl == ""):
+            self.ImageUrl = "https://img.icons8.com/fluency/512/cat-profile.png"
+        else:
+            self.ImageUrl = imageUrl
