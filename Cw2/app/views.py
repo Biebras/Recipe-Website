@@ -16,7 +16,6 @@ def login():
 
     if request.method == 'POST':
         user = UserModel.query.filter_by(Username=form.Username.data).first()
-        # print(load_user(1).Username)
 
         if(user):
             if(user.Password != form.Password.data):
@@ -48,6 +47,7 @@ def register():
         newUser = UserModel(form.Username.data, form.Password.data, form.ProfileUrl.data)
         db.session.add(newUser)
         db.session.commit()
+        login_user(newUser)
         return redirect("/")
 
     return render_template("register.html", title="Register Page", form = form)
