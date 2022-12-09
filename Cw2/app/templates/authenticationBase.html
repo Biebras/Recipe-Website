@@ -26,18 +26,6 @@
                         <div class="d-flex justify-content-center">
                             <div class="login d-flex align-items-center m-0">
                                 <div class="row">
-                                    {% with messages = get_flashed_messages(with_categories=true) %}
-                                        {% if messages %}
-                                            <ul class=flashes>
-                                            {% for category, message in messages %}
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{ message }}
-                                                </div>
-                                            {% endfor %}
-                                            </ul>
-                                        {% endif %}
-                                    {% endwith %}
-                                    
                                     {% block Content %}
                                     {% endblock %}
                                 </div>

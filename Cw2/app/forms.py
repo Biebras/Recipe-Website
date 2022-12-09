@@ -5,12 +5,18 @@ from wtforms.validators import DataRequired, Length, EqualTo
 # create forms
 class RegisterForm(FlaskForm):
     # set validations for every variable
-    Username = StringField("Username", validators=[DataRequired(), Length(4, 16)])
-    Password = PasswordField("New Password", validators=[DataRequired(), EqualTo('ConfirmPassword', message='Passwords must match'), Length(4, 16)])
-    ConfirmPassword = PasswordField("Confirm Password", validators=[DataRequired(), Length(4, 16)])
-    ProfileUrl = StringField("Profile Url", validators=[Length(0, 300)])
-    Terms = BooleanField("Agree?", validators=[DataRequired()])
+    username = StringField("Username", validators=[DataRequired(), Length(4, 16)])
+    password = PasswordField("New Password", validators=[DataRequired(), EqualTo('confirmPassword', message='Passwords must match'), Length(4, 16)])
+    confirmPassword = PasswordField("Confirm Password", validators=[DataRequired(), Length(4, 16)])
+    profileUrl = StringField("Profile Url", validators=[Length(0, 300)])
+    terms = BooleanField("Agree?", validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
-    Username = StringField("Username", validators=[DataRequired(), Length(4, 16)])
-    Password = PasswordField("New Password", validators=[DataRequired(), Length(4, 16)])
+    username = StringField("Username", validators=[DataRequired(), Length(4, 16)])
+    password = PasswordField("New Password", validators=[DataRequired(), Length(4, 16)])
+
+class AddRecipe(FlaskForm):
+    name = StringField("Username", validators=[DataRequired(), Length(1, 100)])
+    ingrediants = StringField("Ingrediants", validators=[DataRequired(), Length(1, 500)])
+    instructions = StringField("Instructions", validators=[DataRequired(), Length(1, 2000)])
+    image_url = StringField("Image Url", validators=[DataRequired(), Length(0, 300)])

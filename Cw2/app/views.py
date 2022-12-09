@@ -2,7 +2,7 @@
 from flask import render_template, request, redirect, flash
 from app import app, db, login_manager
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, AddRecipe
 from .models import UserModel
 
 # handle index template
@@ -15,10 +15,10 @@ def login():
     form = LoginForm(request.form)
 
     if request.method == 'POST':
-        user = UserModel.query.filter_by(Username=form.Username.data).first()
+        user = UserModel.query.filter_by(username=form.username.data).first()
 
         if(user):
-            if(user.Password != form.Password.data):
+            if(user.password != form.password.data):
                 flash("Password or username was incorrect")
             else:
                 login_user(user)
@@ -40,17 +40,30 @@ def register():
     form = RegisterForm(request.form)
 
     if request.method == 'POST':
-        if(form.Password.data != form.ConfirmPassword.data):
+        if(form.password.data != form.confirmPassword.data):
             flash("Passwords should match")
 
+    if(request.method == 'POST' and form.validate() == False):
+        flash(form.errors)
+
     if request.method == 'POST' and form.validate():
-        newUser = UserModel(form.Username.data, form.Password.data, form.ProfileUrl.data)
+        newUser = UserModel(form.username.data, form.password.data, form.profileUrl.data)
         db.session.add(newUser)
         db.session.commit()
         login_user(newUser)
         return redirect("/")
 
     return render_template("register.html", title="Register Page", form = form)
+
+@app.route("/addRecipe", methods=["POST", "GET"])
+def addRecipe():
+    #Create form
+    form = AddRecipe(request.form)
+
+    if(request.method == 'POST' and form.validate() == False):
+        flash(form.errors)
+
+    return render_template("addRecipe.html", title="Add Recipe Page", user = current_user, form = form)
 
 @app.after_request
 def add_header(response):

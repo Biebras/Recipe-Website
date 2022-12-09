@@ -2,34 +2,33 @@
 {% extends "authenticationBase.html" %}
 
 {% block Content %}
-
+{%include "flashHelper.html"%}
 <h1 class="mb-3">Register</h1>
-{% from "formhelpers.html" import render_field %}
 <form action="/register" method="post" name="Registration">
     <!-- custom hidden tag for validation -->
     {{ form.hidden_tag() }}
 
     <div class="form-floating mb-3">
-        {{ form.Username(class_='form-control', placeholder="Username123") }}
+        {{ form.username(class_='form-control', placeholder="Username123") }}
         <label>Username</label>
     </div>
 
     <div class="form-floating mb-3">
-        {{ form.Password(class_='form-control', placeholder="Password") }}
+        {{ form.password(class_='form-control', placeholder="Password") }}
         <label>Password</label>
     </div>
     <div class="form-floating mb-3">
-        {{ form.ConfirmPassword(class_='form-control', placeholder="Password") }}
+        {{ form.confirmPassword(class_='form-control', placeholder="Password") }}
         <label>Confirm Password</label>
     </div>
 
     <div class="form-floating mb-3">
-        {{ form.ProfileUrl(class_='form-control', placeholder="URL") }}
+        {{ form.profileUrl(class_='form-control', placeholder="URL") }}
         <label>Profile Image URL</label>
     </div>
 
     <div class="mb-3">
-        {{ form.Terms(class_='form-check-input', placeholder="URL") }}
+        {{ form.terms(class_='form-check-input', placeholder="URL") }}
         <label>I agree to all statements in <a href="#!">Terms of service</a></label>
     </div>
 
@@ -40,4 +39,5 @@
         </div>
     </div>
 </form>
+
 {% endblock %}

@@ -1,0 +1,25 @@
+<!-- extend base template -->
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container w-50">
+        {%include "flashHelper.html"%}
+        <h1 class="mt-5 mb-4">Add Recipe</h1>
+        <form action="/addRecipe" method="post" name="Add Recipe">
+            <div class="mb-3">
+                <label>Name</label>
+                {{ form.name(class_='form-control', placeholder="Schnitzel") }}
+            </div>
+
+            <div class="mb-3">
+                <label>Image Url</label>
+                {{ form.name(class_='form-control', placeholder="https://..") }}
+            </div>
+
+            <div class="mb-3">
+                <label>Ingrediants</label>
+                {{ form.name(class_='form-control', placeholder="Chicken") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
