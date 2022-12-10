@@ -61,7 +61,7 @@ def addRecipe():
     form = AddRecipe(request.form)
 
     if(request.method == 'POST' and form.validate() == False):
-        flash(form.errors)
+        print(form.ingrediants.data)
 
     return render_template("addRecipe.html", title="Add Recipe Page", user = current_user, form = form)
 

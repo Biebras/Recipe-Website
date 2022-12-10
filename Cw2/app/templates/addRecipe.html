@@ -7,19 +7,37 @@
         <h1 class="mt-5 mb-4">Add Recipe</h1>
         <form action="/addRecipe" method="post" name="Add Recipe">
             <div class="mb-3">
-                <label>Name</label>
+                <label class="mb-1">Name</label>
                 {{ form.name(class_='form-control', placeholder="Schnitzel") }}
             </div>
 
             <div class="mb-3">
-                <label>Image Url</label>
-                {{ form.name(class_='form-control', placeholder="https://..") }}
+                <label class="mb-1">Image Url</label>
+                {{ form.image_url(class_='form-control', placeholder="https://..") }}
             </div>
 
             <div class="mb-3">
-                <label>Ingrediants</label>
-                {{ form.name(class_='form-control', placeholder="Chicken") }}
+                <label class="mb-1">Ingrediants</label>
+                <div id="ingrediants">
+                    {{ form.ingrediants(class_='form-control mb-2', id="ingrediant", placeholder="Chicken") }}
+                </div>
+                <div class="mt-2">
+                    <button type="button" class="btn btn-light border" id="AddIngrediantsButton">+</button>
+                    <button type="button" class="btn btn-light border" id="RemoveIngrediantsButton">–</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="mb-1">Instructions</label>
+                {{ form.instructions(class_='form-control', placeholder="How to make a dish?", rows="10") }}
             </div>
         </form>
+
+        <div class="d-flex justify-content-center">
+            <button id="submitButton" type="submit" class="btn btn-primary btn-lg" value="add recipe">Publish Recipe</button>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='js/addRecipeScript.js')}}"></script>
     </div>
 {% endblock %}
