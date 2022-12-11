@@ -14,6 +14,7 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(4, 16)])
     password = PasswordField("New Password", validators=[DataRequired(), Length(4, 16)])
+    rememberMe = BooleanField("Remember?")
 
 class IngrediantForm(Form):
     ingrediant = StringField("Ingrediant", validators=[DataRequired(), Length(1, 100)])

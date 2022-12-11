@@ -12,6 +12,8 @@
             {% else %}
                 <a href="/followRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star.svg')}}" alt="Favorite Button Not Checked"></a>
             {% endif %}
+
+            <span>({{followers_count}})</span>
         {% endif %}
     </div>
 

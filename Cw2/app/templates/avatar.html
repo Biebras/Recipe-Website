@@ -16,8 +16,8 @@
     <li><a class="dropdown-item">Signed in as <b>{{ user.username }}</b></a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="#">Profile</a></li>
-    <li><a class="dropdown-item" href="#">Your Recipes</a></li>
-    <li><a class="dropdown-item" href="#">Favorite Recipes</a></li>
+    <li><a class="dropdown-item" href="{{url_for('yourRecipies')}}">Your Recipes</a></li>
+    <li><a class="dropdown-item" href="{{url_for('favoriteRecipies')}}">Favorite Recipes</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
   </ul>

@@ -35,7 +35,7 @@ def login():
             if(user.password != form.password.data):
                 flash("Password or username was incorrect")
             else:
-                login_user(user)
+                login_user(user, remember=form.rememberMe.data)
                 return redirect("/")
         else:
             flash("Password or username was incorrect")
@@ -54,6 +54,12 @@ def register():
     form = RegisterForm(request.form)
 
     if request.method == 'POST':
+        # Check if user is already in database
+        user = UserModel.query.filter_by(username=UserModel.username).first()
+        if user is not None:
+            flash('Username already taken. Please choose a different username.')
+            return render_template("register.html", title="Register Page", form = form)
+
         if(form.password.data != form.confirmPassword.data):
             flash("Passwords should match")
 
@@ -73,6 +79,16 @@ def register():
 def allRecipies():
     allRecipies = RecipeModel.query.all()
     return render_template("allRecipies.html", title="All Recipes Page", user = current_user, allRecipies = allRecipies)
+
+@app.route("/yourRecipies", methods=["POST", "GET"])
+@login_required
+def yourRecipies():
+    return render_template("yourRecipies.html", title="All Recipes Page", user = current_user, yourRecipies = current_user.recipes)
+
+@app.route("/favoritesRecipies", methods=["POST", "GET"])
+@login_required
+def favoriteRecipies():
+    return render_template("favoriteRecipies.html", title="All Recipes Page", user = current_user, favoriteRecipies = current_user.favorites)
 
 @app.route("/addRecipe", methods=["POST", "GET"])
 @login_required
@@ -94,6 +110,7 @@ def addRecipe():
 
 @app.route("/recipe/", methods=["POST", "GET"])
 def recipe():
+    print(current_recipe.followers)
     return render_template("recipe.html", title="Recipe Page", user = current_user, current_recipe = current_recipe)
 
 @app.route("/findRecipe/<int:id>", methods=["POST", "GET"])

@@ -5,7 +5,7 @@
     <div class="container w-50">
         {%include "flashHelper.html"%}
         <h1 class="mt-5 mb-4">Add Recipe</h1>
-        <form action="/addRecipe" method="post" name="Add Recipe">
+        <form class="mb-5" action="/addRecipe" method="post" name="Add Recipe">
             <div class="mb-3">
                 <label class="mb-1">Name</label>
                 {{ form.name(class_='form-control', placeholder="Schnitzel") }}
