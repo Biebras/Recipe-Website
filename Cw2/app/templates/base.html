@@ -48,7 +48,7 @@
           <ul class="navbar-nav m-0">
               <!-- Recipes -->
               <li class="nav-item">
-                <a class="nav-link" href="{{url_for('index')}}">All Recipes</a>
+                <a class="nav-link" href="{{url_for('allRecipies')}}">All Recipies</a>
               </li>
               {% if user.is_authenticated %}
               <!-- Add recipes -->
@@ -77,6 +77,12 @@
     {% block main %}
     {% endblock %}
   </main>
+
+  <footer class="bg-light text-center ">
+    <div class="text-center p-3">
+      2022 Tasty.com
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>

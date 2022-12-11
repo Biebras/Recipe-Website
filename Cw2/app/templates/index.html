@@ -1,2 +1,35 @@
 <!-- extend base template -->
 {% extends "base.html" %}
+
+{% block main %}
+
+{% if favorite %}
+<div class="container my-5">
+    <h1>Most Favorite Recipe</h1>
+    <div class="row my-4 favoriteMax">
+        <div class="col-md-6 favoriteMax">
+            <img src="{{favorite.image_url}}"
+            alt="Cinnamon Bun" 
+            class="rounded favoriteImgae">
+        </div>
+        <div class="col-md-6">
+            <h2 class="me-3">{{favorite.name}}</h2>
+            <p class="justify-text">
+                {% autoescape false %}
+                {{favorite.GetInstructions(800)}}
+                {% endautoescape %}
+            </p>
+            <a href="/findRecipe/{{favorite.id}}" class="btn btn-primary">Check recipe</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="container my-5">
+    <h1>Popular Recipies</h1>
+    {% for recipe in popularRecipies %}
+        {% include "recipeCard.html" %}
+    {% endfor %}
+</div>
+
+{% endblock %}

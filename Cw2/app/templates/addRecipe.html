@@ -19,7 +19,14 @@
             <div class="mb-3">
                 <label class="mb-1">Ingrediants</label>
                 <div id="ingrediants">
-                    {{ form.ingrediants(class_='form-control mb-2', id="ingrediant", placeholder="Chicken") }}
+                    <div class="row mb-2">
+                        <div class="col-9 pe-0">
+                            {{ form.ingrediants[0].ingrediant(class_='form-control', id="ingrediant0", placeholder="Chicken") }}
+                        </div>
+                        <div class="col-3 ps-0">
+                            {{ form.ingrediants[0].quantity(class_='form-control', id="quantity0", placeholder="500g") }}
+                        </div>
+                    </div> 
                 </div>
                 <div class="mt-2">
                     <button type="button" class="btn btn-light border" id="AddIngrediantsButton">+</button>
@@ -31,11 +38,11 @@
                 <label class="mb-1">Instructions</label>
                 {{ form.instructions(class_='form-control', placeholder="How to make a dish?", rows="10") }}
             </div>
-        </form>
 
-        <div class="d-flex justify-content-center">
-            <button id="submitButton" type="submit" class="btn btn-primary btn-lg" value="add recipe">Publish Recipe</button>
-        </div>
+            <div class="d-flex justify-content-center">
+                <button id="submitButton" type="submit" class="btn btn-primary btn-lg" value="add recipe">Publish Recipe</button>
+            </div>
+        </form>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="{{url_for('static', filename='js/addRecipeScript.js')}}"></script>

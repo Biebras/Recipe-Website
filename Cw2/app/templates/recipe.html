@@ -1,0 +1,55 @@
+<!-- extend base template -->
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container my-5">
+
+    <div class="d-flex align-items-center mb-2">
+        <h1 class="">{{current_recipe.name}}</h1>
+        {% if user.is_authenticated %}
+            {% if current_recipe in user.favorites %}
+                <a href="/unfollowRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star-fill.svg')}}" alt="Favorite Bytton Checked"></a>
+            {% else %}
+                <a href="/followRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star.svg')}}" alt="Favorite Button Not Checked"></a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="row ">
+        <div class="recipeDivMaxHeight col-12 pe-1">
+            <img class="recipeMainImage rounded" src="{{current_recipe.image_url}}" alt="Recipe image Balls">
+        </div>
+    </div>
+
+    <div class="container my-5 mx-0 p-0">
+        <div class="row justify-content-center">
+            <div class="col-auto ps-0">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        Ingredients
+                    </div>
+                        {% for ingrediant in current_recipe.GetIngrediants() %}
+                            <div class="row m-0">
+                                <div class="col-9 border">
+                                    <div class="d-flex align-items-center w-100 h-100 py-2">
+                                        <p class="m-0">{{ingrediant[0]}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-3 border">
+                                    <div class="d-flex align-items-center w-100 h-100 py-2">
+                                        <p class="m-0">{{ingrediant[1]}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h2 class="mb-3">Preparation</h2>
+                {% autoescape false %}
+                <p class="justify-text">{{current_recipe.GetInstructions(-1)}}</p>
+                {% endautoescape %}
+        </div>
+    </div>
+</div>
+{% endblock %}

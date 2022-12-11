@@ -1,0 +1,16 @@
+<div class="row my-5">
+    <div class="col-md-6">
+        <img src="{{recipe.image_url}}"
+        alt="Cinnamon Bun" 
+        class="rounded favoriteImgae">
+    </div>
+    <div class="col-md-6">
+        <h2 class="me-3">{{recipe.name}}</h2>
+        <p class="justify-text">
+            {% autoescape false %}
+            {{recipe.GetInstructions(400)}}
+            {% endautoescape %}
+        </p>
+        <a href="/findRecipe/{{recipe.id}}" class="btn btn-primary">Check recipe</a>
+    </div>
+</div>

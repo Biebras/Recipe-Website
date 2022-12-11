@@ -1,8 +1,21 @@
 $.fn.AddIngrediant = function()
 {
-    $clone = $("#ingrediants").children().first().clone();
-    $clone.val("");
-    $clone.appendTo("#ingrediants");
+    $count = $("#ingrediants").children().length;
+
+    if($count >= 20)
+        return;
+
+    $parent = $("#ingrediants").children().first().clone();
+    $ingrediant = $parent.find('#ingrediant0')
+    $quantity =  $parent.find('#quantity0')
+
+    $ingrediant.val("");
+    $quantity.val("");
+
+    $ingrediant.attr("name", "ingrediants-" + $count +"-ingrediant")
+    $quantity.attr("name", "ingrediants-" + $count +"-quantity")
+
+    $parent.appendTo("#ingrediants");
 }
 
 $.fn.RemoveIngrediant = function()
@@ -25,9 +38,4 @@ $("#RemoveIngrediantsButton").click(function(e)
 {
     e.stopImmediatePropagation();
     $(this).RemoveIngrediant();
-});
-
-$("#submitButton").click(function(e)
-{
-    
 });

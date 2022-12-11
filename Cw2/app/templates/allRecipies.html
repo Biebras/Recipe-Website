@@ -1,0 +1,12 @@
+<!-- extend base template -->
+{% extends "base.html" %}
+
+{% block main %}
+
+    <div class="container my-5">
+        {% for recipe in allRecipies %}
+            {% include "recipeCard.html" %}
+        {% endfor %}
+    </div>
+    
+{% endblock %}

@@ -3,3 +3,63 @@
     border-radius: 50%;
     border: 1px solid #000000;
 }
+
+.favoriteMax
+{
+    max-height: 500px;
+}
+
+.smallRecipieCard
+{
+    height: 250px;
+}
+
+.smallRecipeImage
+{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.recipeDivMaxHeight
+{
+    max-height: 400px;
+}
+
+.recipeMainImage
+{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.favoriteImgae
+{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.vertical-midlle
+{
+    vertical-align: middle;
+}
+
+.justify-text
+{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.flip
+{
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.tranpsarent-button
+{
+    background-color: transparent;
+    border-color: rgb(255, 255, 255);
+}
+  

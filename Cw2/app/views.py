@@ -2,13 +2,27 @@
 from flask import render_template, request, redirect, flash
 from app import app, db, login_manager
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from .forms import RegisterForm, LoginForm, AddRecipe
-from .models import UserModel
+from .forms import RegisterForm, LoginForm, RecipeForm
+from .models import UserModel, RecipeModel
+import time
+
+current_recipe = None
 
 # handle index template
 @app.route("/")
 def index():
-    return render_template("index.html", title="Home Page", user = current_user)
+    mostPupularRecipe = None
+    allRecipes = RecipeModel.query.all()
+    
+    sortedRecipies = sorted(allRecipes, key=lambda x: len(x.followers), reverse=True)
+
+    if(len(sortedRecipies) is not 0):
+        mostPupularRecipe = sortedRecipies[0]
+        sortedRecipies.remove(mostPupularRecipe)
+
+    popularRecipies = sortedRecipies[:6]
+
+    return render_template("index.html", title="Home Page", user = current_user, favorite = mostPupularRecipe, popularRecipies = popularRecipies)
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -55,15 +69,55 @@ def register():
 
     return render_template("register.html", title="Register Page", form = form)
 
+@app.route("/allRecipies", methods=["POST", "GET"])
+def allRecipies():
+    allRecipies = RecipeModel.query.all()
+    return render_template("allRecipies.html", title="All Recipes Page", user = current_user, allRecipies = allRecipies)
+
 @app.route("/addRecipe", methods=["POST", "GET"])
+@login_required
 def addRecipe():
     #Create form
-    form = AddRecipe(request.form)
+    form = RecipeForm(request.form)
 
     if(request.method == 'POST' and form.validate() == False):
-        print(form.ingrediants.data)
+        ingrediants = ""
+        for x in form.ingrediants:
+            ingrediants += "{" + x.ingrediant.data + "|" + x.quantity.data + "}"
+        
+        recipe = RecipeModel(form.name.data, ingrediants, form.instructions.data, form.image_url.data, current_user.id)
+        db.session.add(recipe)
+        db.session.commit()
+        return redirect("/")
 
     return render_template("addRecipe.html", title="Add Recipe Page", user = current_user, form = form)
+
+@app.route("/recipe/", methods=["POST", "GET"])
+def recipe():
+    return render_template("recipe.html", title="Recipe Page", user = current_user, current_recipe = current_recipe)
+
+@app.route("/findRecipe/<int:id>", methods=["POST", "GET"])
+def findRecipe(id):
+    global current_recipe
+    current_recipe = RecipeModel.query.get(id)
+    return redirect("/recipe")
+
+@app.route("/followRecipe", methods=["POST", "GET"])
+@login_required
+def followRecipe():
+    current_user.favorites.append(current_recipe)
+    db.session.commit()
+    print(current_recipe)
+    return redirect("/recipe")
+
+@app.route("/unfollowRecipe", methods=["POST", "GET"])
+@login_required
+def unfollowRecipe():
+    current_user.favorites.remove(current_recipe)
+    db.session.commit()
+    # Wait for commit end before turning recipe
+    time.sleep(0.1)
+    return redirect("/recipe")
 
 @app.after_request
 def add_header(response):
