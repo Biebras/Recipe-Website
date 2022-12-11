@@ -19,7 +19,6 @@ class RecipeModel(db.Model):
     instructions = db.Column(db.String(2000), nullable=False)
     image_url = db.Column(db.String(300), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    followers = db.relationship('UserModel', secondary=favorites, back_populates="favorites")
 
     def __repr__(self):
         return f'<RecipeModel "{self.name}">'
@@ -77,7 +76,7 @@ class UserModel(db.Model, UserMixin):
     password = db.Column(db.String(16), nullable=False)
     image_url = db.Column(db.String(300), nullable=False)
     recipes = db.relationship('RecipeModel', backref='owner')
-    favorites = db.relationship('RecipeModel', secondary=favorites, back_populates="followers")
+    favorites = db.relationship('RecipeModel', secondary=favorites, backref='followers')
 
     def __repr__(self):
         return f'<UserModel "{self.username}">' 

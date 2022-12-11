@@ -6,7 +6,7 @@ from .forms import RegisterForm, LoginForm, RecipeForm
 from .models import UserModel, RecipeModel
 import time
 
-current_recipe = None
+current_recipe_id = None
 
 # handle index template
 @app.route("/")
@@ -110,30 +110,30 @@ def addRecipe():
 
 @app.route("/recipe/", methods=["POST", "GET"])
 def recipe():
-    print(current_recipe.followers)
-    return render_template("recipe.html", title="Recipe Page", user = current_user, current_recipe = current_recipe)
+    recipe = get_current_recipe()
+    followers_count = len(recipe.followers)
+    return render_template("recipe.html", title="Recipe Page", user = current_user, current_recipe = recipe, followers_count = followers_count)
 
 @app.route("/findRecipe/<int:id>", methods=["POST", "GET"])
 def findRecipe(id):
-    global current_recipe
-    current_recipe = RecipeModel.query.get(id)
+    global current_recipe_id
+    current_recipe_id = id
     return redirect("/recipe")
 
 @app.route("/followRecipe", methods=["POST", "GET"])
 @login_required
 def followRecipe():
-    current_user.favorites.append(current_recipe)
+    recipe = get_current_recipe()
+    current_user.favorites.append(recipe)
     db.session.commit()
-    print(current_recipe)
-    return redirect("/recipe")
+    return redirect("/recipe/")
 
 @app.route("/unfollowRecipe", methods=["POST", "GET"])
 @login_required
 def unfollowRecipe():
-    current_user.favorites.remove(current_recipe)
+    recipe = get_current_recipe()
+    current_user.favorites.remove(recipe)
     db.session.commit()
-    # Wait for commit end before turning recipe
-    time.sleep(0.1)
     return redirect("/recipe")
 
 @app.after_request
@@ -145,3 +145,6 @@ def add_header(response):
 @login_manager.user_loader
 def load_user(userID):
     return UserModel.query.get(userID)
+
+def get_current_recipe():
+    return RecipeModel.query.get(current_recipe_id)
