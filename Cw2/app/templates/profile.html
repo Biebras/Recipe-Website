@@ -1,0 +1,40 @@
+<!-- extend base template -->
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container-md my-5 loginContainer">
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <form action="/profile" method="post" name="Update profile">
+            {{ form.hidden_tag() }}
+            
+            <div class="card bg-light mb-4 loginCard">
+                <div class="card-header mb-2">Profile: <b>{{user.username}}</b></div>
+                <div class="card-body">
+                    <!-- custom hidden tag for validation -->
+                    {{ form.hidden_tag() }}
+                    <div class="p-0">
+                        {%include "flashHelper.html"%}
+                    </div>
+                    <div class="form-floating mb-4">
+                        {{ form.password(class_='form-control') }}
+                        <label>New Password</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        {{ form.confirmPassword(class_='form-control') }}
+                        <label>Confirm Password</label>
+                    </div>
+    
+                    <div class="form-floating mb-4">
+                        {{ form.profileUrl(class_='form-control', value=user.image_url) }}
+                        <label>Profile Image URL</label>
+                    </div>
+    
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary fw-bold mb-2" value="profile">Update profile</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

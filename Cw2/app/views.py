@@ -2,15 +2,15 @@
 from flask import render_template, request, redirect, flash
 from app import app, db, login_manager
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from .forms import RegisterForm, LoginForm, RecipeForm
+from .forms import RegisterForm, LoginForm, RecipeForm, ProfileForm
 from .models import UserModel, RecipeModel
-import time
 
 current_recipe_id = None
 
 # handle index template
 @app.route("/")
 def index():
+    app.logger.info('index route request')
     mostPupularRecipe = None
     allRecipes = RecipeModel.query.all()
     
@@ -20,60 +20,113 @@ def index():
         mostPupularRecipe = sortedRecipies[0]
         sortedRecipies.remove(mostPupularRecipe)
 
-    popularRecipies = sortedRecipies[:6]
-
+    popularRecipies = sortedRecipies[:3]
+    app.logger.info('render index template')
     return render_template("index.html", title="Home Page", user = current_user, favorite = mostPupularRecipe, popularRecipies = popularRecipies)
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    app.logger.info("login route request")
     form = LoginForm(request.form)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
+        app.logger.info("login form validate success")
         user = UserModel.query.filter_by(username=form.username.data).first()
 
-        if(user):
-            if(user.password != form.password.data):
-                flash("Password or username was incorrect")
-            else:
-                login_user(user, remember=form.rememberMe.data)
-                return redirect("/")
-        else:
+        if(user.password != form.password.data):
+            app.logger.warning("Password or username was incorrect, refresing login page")
             flash("Password or username was incorrect")
+            return render_template("login.html", title="Login Page", form = form)
 
+        if(user):
+            login_user(user, remember=form.rememberMe.data)
+            app.logger.info("user successfully loged in, redirecting to index")
+            return redirect("/")
+        else:
+            app.logger.warning("User was not found, login failed")
+
+
+    app.logger.info("rendering login template")
     return render_template("login.html", title="Login Page", form = form)
 
 @app.route("/logout")
+@login_required
 def logout():
+    app.logger.info("logout request")
     logout_user()
+    app.logger.info("logout successful, redirecting to index")
     return redirect("/")
 
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
+    app.logger.info("register route request")
     #Create form
     form = RegisterForm(request.form)
 
-    if request.method == 'POST':
-        # Check if user is already in database
-        user = UserModel.query.filter_by(username=UserModel.username).first()
-        if user is not None:
-            flash('Username already taken. Please choose a different username.')
-            return render_template("register.html", title="Register Page", form = form)
-
+    if(request.method == "POST"):
+        app.logger.info("register form posted")
         if(form.password.data != form.confirmPassword.data):
             flash("Passwords should match")
-
-    if(request.method == 'POST' and form.validate() == False):
-        flash(form.errors)
+            app.logger.warning("Registration failed, passwords don't match, refreshin register page")
+            return render_template("register.html", title="Register Page", form = form)
 
     if request.method == 'POST' and form.validate():
+        app.logger.info("register form validate success")
+
+        # Check if user is already in database
+        user = UserModel.query.filter_by(username=form.username.data).first()
+
+        if user is not None:
+            flash('Username already taken. Please choose a different username.')
+            app.logger.warning("Registration failed, username is already taken, refreshin register page")
+            return render_template("register.html", title="Register Page", form = form)
+
+        app.logger.info("Crating new user")
         newUser = UserModel(form.username.data, form.password.data, form.profileUrl.data)
         db.session.add(newUser)
         db.session.commit()
+        app.logger.info("New user commited to the database")
         login_user(newUser)
+        app.logger.info("user successfully signed in, logining user and redirecting to index")
         return redirect("/")
 
+    app.logger.info("rendering register template")
     return render_template("register.html", title="Register Page", form = form)
+
+@app.route("/profile", methods=["POST", "GET"])
+@login_required
+def profile():
+    app.logger.info("profile route request")
+    form = ProfileForm(request.form)
+
+    if request.method == 'POST':
+        app.logger.info("profile form posted")
+
+        if(form.password.data != form.confirmPassword.data):
+            flash("Passwords should match")
+            app.logger.warning("Profile failed, passwords don't match, refreshin profile page")
+            return render_template("profile.html", title="All Recipes Page", user = current_user, form = form)
+    
+    if request.method == 'POST' and form.validate():
+        app.logger.info("profile form validate success")
+
+        if(current_user.password == form.password.data):
+            flash("Your new password can't be your old password")
+            app.logger.warning("Profile failed, new password is old password, refreshin profile page")
+            return render_template("profile.html", title="All Recipes Page", user = current_user, form = form)
+
+        if(form.password.data != ""):
+            app.logger.info("changing user password")
+            current_user.password = form.password.data
+
+        current_user.image_url = form.profileUrl.data
+        db.session.commit()
+        app.logger.info("user changes commited to database, refreshing page to index")
+        return redirect("/")
+
+    app.logger.info("rendering profile template")
+    return render_template("profile.html", title="All Recipes Page", user = current_user, form = form)
 
 @app.route("/allRecipies", methods=["POST", "GET"])
 def allRecipies():
@@ -97,6 +150,7 @@ def addRecipe():
     form = RecipeForm(request.form)
 
     if(request.method == 'POST' and form.validate() == False):
+        print("Hmm?")
         ingrediants = ""
         for x in form.ingrediants:
             ingrediants += "{" + x.ingrediant.data + "|" + x.quantity.data + "}"
@@ -135,6 +189,18 @@ def unfollowRecipe():
     current_user.favorites.remove(recipe)
     db.session.commit()
     return redirect("/recipe")
+
+@app.route("/deleteRecipe", methods=["POST", "GET"])
+@login_required
+def deleteRecipe():
+    recipe = get_current_recipe()
+
+    if(recipe.owner.id != current_user.id):
+        return redirect("/")
+
+    db.session.delete(recipe)
+    db.session.commit()
+    return redirect("/")
 
 @app.after_request
 def add_header(response):

@@ -1,0 +1,20 @@
+profile route request
+rendering profile template
+profile route request
+profile form posted
+Profile failed, passwords don't match, refreshin profile page
+profile route request
+profile form posted
+profile form validate success
+user changes commited to database, refreshing page to index
+index route request
+render index template
+profile route request
+rendering profile template
+profile route request
+profile form posted
+profile form validate success
+changing user password
+user changes commited to database, refreshing page to index
+index route request
+render index template

@@ -62,4 +62,13 @@
     background-color: transparent;
     border-color: rgb(255, 255, 255);
 }
-  
+
+.loginContainer
+{
+    height: 45rem;
+}
+
+.loginCard
+{
+    width: 27rem;
+}

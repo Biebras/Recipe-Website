@@ -5,6 +5,8 @@
 {%include "flashHelper.html"%}
 <h1 class="mb-3">Welcome Back!</h1>
 <form action="/login" method="post" name="Login">
+    {{ form.hidden_tag() }}
+
     <div class="form-floating mb-3">
         {{ form.username(class_='form-control', placeholder="Username123") }}
         <label for="floatingInput">Username</label>

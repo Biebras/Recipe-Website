@@ -4,29 +4,38 @@
 {% block main %}
 <div class="container my-5">
 
-    <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
         <h1 class="">{{current_recipe.name}}</h1>
         {% if user.is_authenticated %}
             {% if current_recipe in user.favorites %}
-                <a href="/unfollowRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star-fill.svg')}}" alt="Favorite Bytton Checked"></a>
+                <a href="/unfollowRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star-fill.svg')}}" alt="Favorite checked"></a>
             {% else %}
-                <a href="/followRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star.svg')}}" alt="Favorite Button Not Checked"></a>
+                <a href="/followRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star.svg')}}" alt="Favorite unchecked"></a>
             {% endif %}
 
+            <span>({{followers_count}})</span>
+        {% else %}
+            <a href="/followRecipe"><img class="ps-2" src="{{url_for('static', filename='images/star.svg')}}" alt="Favorite unchecked"></a>
             <span>({{followers_count}})</span>
         {% endif %}
     </div>
 
     <div class="row ">
+        <p class="mb-2">Created by <b>{{ current_recipe.owner.username }}</b>
+            <img src="{{current_recipe.owner.image_url}}" class="avatarImage" height="25" width="25" alt="Profile picture" loading="lazy"/>
+            {% if user.id == current_recipe.owner.id %}
+                <a href="/deleteRecipe"><img src="{{url_for('static', filename='images/trash-fill.svg')}}" alt="Delete button"></a>
+            {% endif %}
+        </p>
         <div class="recipeDivMaxHeight col-12 pe-1">
-            <img class="recipeMainImage rounded" src="{{current_recipe.image_url}}" alt="Recipe image Balls">
+            <img class="recipeMainImage rounded" src="{{current_recipe.image_url}}" alt="Recipe image">
         </div>
     </div>
 
     <div class="container my-5 mx-0 p-0">
         <div class="row justify-content-center">
             <div class="col-auto ps-0">
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 19rem;">
                     <div class="card-header">
                         Ingredients
                     </div>

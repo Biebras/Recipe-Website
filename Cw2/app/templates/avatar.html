@@ -7,7 +7,7 @@
     src="{{user.image_url}}"
     class="avatarImage mx-1"
     height="35"
-    alt="Black and White Portrait of a Man"
+    alt="Avatar image"
     loading="lazy"
     />
   </button>
@@ -15,7 +15,7 @@
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
     <li><a class="dropdown-item">Signed in as <b>{{ user.username }}</b></a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Profile</a></li>
+    <li><a class="dropdown-item" href="{{url_for('profile')}}">Profile</a></li>
     <li><a class="dropdown-item" href="{{url_for('yourRecipies')}}">Your Recipes</a></li>
     <li><a class="dropdown-item" href="{{url_for('favoriteRecipies')}}">Favorite Recipes</a></li>
     <li><hr class="dropdown-divider"></li>
