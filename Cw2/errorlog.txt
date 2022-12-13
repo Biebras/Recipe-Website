@@ -18,3 +18,58 @@ changing user password
 user changes commited to database, refreshing page to index
 index route request
 render index template
+index route request
+render index template
+index route request
+render index template
+index route request
+render index template
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+add recipies route request
+index route request
+render index template
+all recipies route request
+rendering all recipies template
+add recipies route request
+add recipies route request
+add recipies route request
+index route request
+render index template
+all recipies route request
+rendering all recipies template
+index route request
+render index template
+login route request
+rendering login template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+profile route request
+rendering profile template
+index route request
+render index template
