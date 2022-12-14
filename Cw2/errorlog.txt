@@ -73,3 +73,341 @@ profile route request
 rendering profile template
 index route request
 render index template
+index route request
+render index template
+logout request
+logout successful, redirecting to index
+index route request
+render index template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+all recipies route request
+rendering all recipies template
+login route request
+rendering login template
+login route request
+login form validate success
+Password or username was incorrect, refresing login page
+register route request
+rendering register template
+register route request
+register form posted
+register form validate success
+Registration failed, username is already taken, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+logout request
+logout successful, redirecting to index
+index route request
+render index template
+login route request
+rendering login template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+add recipies route request
+rendering add recipe template
+add recipies route request
+add recipe form validate success
+recipe commited to database, refreshing page to index
+index route request
+render index template
+all recipies route request
+rendering all recipies template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+delete recupe function call
+delete recipe, changes commited
+rederecting to index template
+index route request
+render index template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+follow recipe function call
+recipe follow data was commited
+rederecting to recipe template
+recipe route request
+rendering recipe template
+favorite recipies route request
+rendering favorite recipies template
+your recipies route request
+rendering your recipies template
+add recipies route request
+rendering add recipe template
+add recipies route request
+add recipe form validate success
+recipe commited to database, refreshing page to index
+index route request
+render index template
+your recipies route request
+rendering your recipies template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+follow recipe function call
+recipe follow data was commited
+rederecting to recipe template
+recipe route request
+rendering recipe template
+delete recupe function call
+delete recipe, changes commited
+rederecting to index template
+index route request
+render index template
+profile route request
+rendering profile template
+profile route request
+profile form posted
+profile form validate success
+user changes commited to database, refreshing page to index
+index route request
+render index template
+profile route request
+rendering profile template
+profile route request
+profile form posted
+profile form validate success
+changing user password
+user changes commited to database, refreshing page to index
+index route request
+render index template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+find recipe function call
+rederecting to recipe template
+recipe route request
+rendering recipe template
+add recipies route request
+rendering add recipe template
+all recipies route request
+rendering all recipies template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+login route request
+rendering login template
+login route request
+login form validate success
+Password or username was incorrect, refresing login page
+login route request
+login form validate success
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+index route request
+render index template
+register route request
+register form posted
+rendering register template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+Registration failed, passwords don't match, refreshin register page
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+logout request
+logout successful, redirecting to index
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template

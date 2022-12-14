@@ -1,19 +1,23 @@
-.login {
-    min-height: 100vh;
-  }
+.login 
+{
+  min-height: 100vh;
+}
   
-  .bg-image {
-    background-image: url('https://source.unsplash.com/cd_Q-EshUy0/900x900');
-    background-size: cover;
-    background-position: center;
-  }
+.bg-image 
+{
+  background-image: url('https://source.unsplash.com/cd_Q-EshUy0/900x900');
+  background-size: cover;
+  background-position: center;
+}
   
-  .login-heading {
-    font-weight: 300;
-  }
+.login-heading 
+{
+  font-weight: 300;
+}
   
-  .btn-login {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
-  }
+.btn-login 
+{
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
