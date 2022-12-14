@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app, db, models, forms
 
 class Unittesting(unittest.TestCase):
+    # set up testing
     def setUp(self):
         app.config.from_object('config')
         app.config['TESTING'] = True
@@ -15,6 +16,7 @@ class Unittesting(unittest.TestCase):
         db.create_all()
         pass
 
+    # testing succesfull user model
     def test_user_model(self):
         user = models.UserModel("Tadas", "Tadas123", "SomeURL")
 
@@ -28,6 +30,7 @@ class Unittesting(unittest.TestCase):
         assert dbUser.password == "Tadas123"
         assert dbUser.image_url == "SomeURL"
 
+    # testing succesfull recipe model
     def test_recipe_model(self):
         user = models.UserModel("Ponas", "Ponas123", "SomeURL")
         db.session.add(user)
@@ -47,6 +50,7 @@ class Unittesting(unittest.TestCase):
         assert dbRecipe.instructions == "Just bake it"
         assert dbRecipe.image_url == "SomeURL"
 
+    # testing succesful user favorites
     def test_user_favorites(self):
         user = models.UserModel("Kodas", "Kodas123", "SomeURL")
         db.session.add(user)
@@ -65,14 +69,17 @@ class Unittesting(unittest.TestCase):
 
         assert firstFollower.username == user.username
 
+    # testing index
     def test_index(self):
         response = self.app.get('/', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
+    # testing succesful user registration
     def test_valid_user_registration(self):
         response = self.register('Tadas', 'FlaskIsAwesome', 'FlaskIsAwesome', 'SomeURL', True)
         self.assertEqual(response.status_code, 200)
 
+    # testing succesful user login
     def test_valid_user_login(self):
         user = models.UserModel("Kodas", "Kodas123", "SomeURL")
         db.session.add(user)
@@ -81,7 +88,8 @@ class Unittesting(unittest.TestCase):
         response = self.login('Kodas', 'Kodas123')
         self.assertEqual(response.status_code, 200)
 
-    def test_valid_user_login(self):
+    # testing succesful user logout
+    def test_valid_user_logout(self):
         user = models.UserModel("Kodas", "Kodas123", "SomeURL")
         db.session.add(user)
         db.session.commit()
@@ -92,18 +100,20 @@ class Unittesting(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-
+    # teardow method
     def tearDown(self):
         db.session.remove()
         db.drop_all()
 
+    # helper method for registering user
     def register(self, username, password, confirmPassword, profileUrl, terms):
         return self.app.post(
         '/register',
         data=dict(username=username, password=password, confirmPassword=confirmPassword, profileUrl = profileUrl, terms = terms),
         follow_redirects=True
         )
-        
+
+    # helper methon to loging in user
     def login(self, username, password):
         return self.app.post(
         '/login',
@@ -111,6 +121,7 @@ class Unittesting(unittest.TestCase):
         follow_redirects=True
         )
         
+    # helper function helping loging out user
     def logout(self):
         return self.app.get(
         '/logout',

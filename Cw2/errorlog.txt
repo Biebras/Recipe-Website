@@ -411,3 +411,27 @@ New user commited to the database
 user successfully signed in, logining user and redirecting to index
 index route request
 render index template
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+login route request
+login form validate success
+user successfully loged in, redirecting to index
+index route request
+render index template
+logout request
+logout successful, redirecting to index
+index route request
+render index template
+register route request
+register form posted
+register form validate success
+Crating new user
+New user commited to the database
+user successfully signed in, logining user and redirecting to index
+index route request
+render index template
