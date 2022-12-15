@@ -477,3 +477,11 @@ login route request
 rendering login template
 register route request
 rendering register template
+index route request
+render index template
+index route request
+render index template
+index route request
+render index template
+index route request
+render index template
