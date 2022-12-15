@@ -48,6 +48,10 @@
           <ul class="navbar-nav m-0">
               <!-- Recipes -->
               <li class="nav-item">
+                <a class="nav-link" href="{{url_for('/')}}">Home</a>
+              </li>
+              <!-- Recipes -->
+              <li class="nav-item">
                 <a class="nav-link" href="{{url_for('allRecipies')}}">All Recipies</a>
               </li>
               {% if user.is_authenticated %}
