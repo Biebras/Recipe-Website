@@ -2,6 +2,7 @@
 {% extends "authenticationBase.html" %}
 
 {% block Content %}
+
 {%include "flashHelper.html"%}
 <h1 class="mb-3">Welcome Back!</h1>
 <form action="/login" method="post" name="Login">
@@ -15,12 +16,14 @@
         {{ form.password(class_='form-control', placeholder="Password") }}
         <label for="floatingPassword">Password</label>
     </div>
-    <div class="form-check mb-3">
-        {{ form.rememberMe(class = "form-check-input", type="checkbox") }}
-        <label class="form-check-label" for="rememberPasswordCheck">
-            Remember me
-        </label>
-    </div>
+    {% if cookiesAccepted == True %}
+        <div class="form-check mb-3">
+            {{ form.rememberMe(class = "form-check-input", type="checkbox") }}
+            <label class="form-check-label" for="rememberMe">
+                Remember me
+            </label>
+        </div>
+    {% endif %}
 
     <div class="d-grid">
         <button type="submit" class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" value="login">Sign In</button>
@@ -29,4 +32,27 @@
         </div>
     </div>
 </form>
+
+{% if cookiesAccepted == False%}
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Cookies</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>This website uses cookies click accept to accept them.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+            <form action = "/acceptCookies" method = "POST">
+                <button type="submit" class="btn btn-primary" value="login">Accept Cookies</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+{% endif %}
+
 {% endblock %}

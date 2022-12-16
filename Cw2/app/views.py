@@ -1,5 +1,5 @@
 # import necessary labraries 
-from flask import render_template, request, redirect, flash
+from flask import render_template, request, redirect, flash, make_response, url_for
 from app import app, db, login_manager
 from flask_login import login_user, login_required, logout_user, current_user
 from .forms import RegisterForm, LoginForm, RecipeForm, ProfileForm
@@ -32,6 +32,9 @@ def index():
 # handles login template
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    cookiesAccepted = request.cookies.get('cookiesAccepted') != None
+    print(cookiesAccepted)
+
     app.logger.info("login route request")
     form = LoginForm(request.form)
 
@@ -58,7 +61,7 @@ def login():
 
     app.logger.info("rendering login template")
     # render login template
-    return render_template("login.html", title="Login Page", form = form)
+    return render_template("login.html", title="Login Page", form = form, cookiesAccepted = cookiesAccepted)
 
 # logouts user
 @app.route("/logout")
@@ -283,6 +286,18 @@ def deleteRecipe():
     app.logger.info("rederecting to index template")
     # redirect user to index template
     return redirect("/")
+
+# accept cookies
+@app.route("/acceptCookies", methods = ['POST'])
+def acceptCookies():
+    app.logger.info("cockies start accept")
+    if request.method == 'POST':
+        # set cookies
+        resp = make_response(redirect("/login"))
+        resp.set_cookie('cookiesAccepted', value='setcoockies')
+        app.logger.info("cockies set")
+        return resp
+    app.logger.warning("cookies form failled")
 
 @app.after_request
 def add_header(response):
